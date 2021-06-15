@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Práctica API's HTML5</title>
+  <style>
+    /* Variables */
+:root {
+  --bar-width: 0;
+  --p_: #7d83b8;
+  --p_Os: #0e43b6;
+  --s_: #999999;
+  --s_Os: #666666;
+  --w: #fff;
+  --b: #000;
+  --v: rgb(74, 185, 0);
+  --r: rgb(238, 146, 146);
+  -ms-grid-row-align: rgb(185, 0, 0);
+  --f_Doc: "Courier New", Courier, monospace;
+  --f_Head: Arial, Helvetica, sans-serif;
+}
+/* Reglas adaptativas */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  width: 100%;
+}
+
+/* Global */
+body {
+  margin: 0;
+  background-image: radial-gradient(circle, var(--p_), var(--p_Os));
+  font-family: var(--f_Doc);
+  display: flex;
+  flex-direction: column;
+  color: var(--w);
+}
+.titulo {
+  padding: 2em;
+  text-align: center;
+  font-size: 4rem;
+  margin-top: auto;
+}
+
+/* Zona Principal */
+.contenedores {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 200px;
+  margin: auto;
+}
+
+/* Zona de carga del archivo */
+.carga {
+  max-width: 320px;
+  background-color: var(--r);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 1 320px;
+  border-radius: 2rem;
+}
+.mensaje {
+  margin: auto;
+  text-align: center;
+  padding-top: 1.5rem;
+  font-size: 3rem;
+}
+.carga input {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+}
+
+/* Barra  carga archivo*/
+.load-bar {
+  width: 80%;
+  height: 10px;
+  position: relative;
+  margin-bottom: 3rem;
+}
+.load-bar::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--p_Os);
+  width: var(--bar-width);
+  height: 10px;
+}
+.progress {
+  display: block;
+  background-color: var(--p_Os);
+  height: 10px;
+  width: 0;
+  color: red;
+  content: "";
+}
+
+/* Zona de Reproducción*/
+.reproduce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 520px;
+}
+
+.video {
+  width: 600px;
+  margin: 20px auto;
+  padding: 5px;
+  background: var(--s_);
+  border: 1px solid var(--s_Os);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.video[poster] {
+  width: 600px;
+  height: 350px;
+}
+/* Controles */
+
+.botones {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.boton {
+  width: 8rem;
+  color: var(--w);
+  background-color: var(--b);
+  text-shadow: 0 0 5px var(--w), 0 0 10px var(--w), 0 0 15px var(--w),
+    0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18,
+    0 0 75px #49ff18;
+
+  color: var(--p_Os);
+  font-size: 15px;
+  line-height: 15px;
+  padding: 3px;
+  border-radius: 12px;
+
+  background-image: linear-gradient(
+    rgb(28, 110, 164) 0%,
+    rgb(35, 136, 203) 50%,
+    rgb(20, 78, 117) 100%
+  );
+  box-shadow: rgb(0, 0, 0) 5px -1px 14px 5px;
+  border: 2px solid rgb(28, 110, 164);
+}
+.boton:hover {
+  background: #d6e591;
+}
+
+/* Barra del video*/
+.barra_progreso {
+  width: 400px;
+  background: var(--s_);
+  border: 1px solid var(--s_Os);
+  border-radius: 0.5rem;
+  padding-bottom: 2rem;
+  position: relative;
+}
+.progreso {
+  position: absolute;
+  width: 0px;
+  height: 100%;
+  top: 0;
+  background: var(--p_Os);
+}
+/* Pie de Página */
+footer {
+  margin: auto;
+  padding-top: 15rem;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: auto;
+  background-repeat: no-repeat;
+}
+
+  </style>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1 class="titulo">Práctica API's HTML5</h1>
+
+  <main id="contenedores" class="contenedores">
+
+    <section id="carga" class="carga">
+      <p id="mensaje" class="mensaje">
+        seleccione su archivo <br /><br />&#128193;
+      </p>
+      <input type="file" id="file" />
+      <div id="load-bar" class="load-bar">
+        <span id="progress" class="progress"></span>
+      </div>
+    </section>
+    <section id="reprodude" class="reproduce">
+      <video id="video" class="video" src=""
+        poster="https://cdn.iconscout.com/icon/premium/png-512-thumb/no-data-1995355-1686641.png"></video>
+      <nav>
+        <div id="barra_progreso" class="barra_progreso">
+          <div id="progreso" class="progreso"></div>
+        </div>
+        <div id="botones" class="botones">
+          <button id="empezar" class="boton" onclick="repro();">Play</button>
+          <button id="parar" class="boton" onclick="parar();">Stop</button>
+          <button id="subir" class="boton" onclick="subir();">
+            Volumen+
+          </button>
+          <button id="bajar" class="boton" onclick="bajar();">
+            Volumen-
+          </button>
+        </div>
+      </nav>
+    </section>
+    <footer>
+      <h1>Sandra Gilazaña Martínez</h1>
+    </footer>
+  </main>
+</body>
+
+</html>
